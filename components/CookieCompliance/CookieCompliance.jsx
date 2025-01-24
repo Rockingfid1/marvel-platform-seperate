@@ -1,4 +1,4 @@
-const ReactCookieBot = require("react-cookiebot");
+const ReactCookieBot = require('react-cookiebot');
 
 const CookieCompliance = (props) => {
   return (

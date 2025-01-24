@@ -1,4 +1,4 @@
-const { default: ReCAPTCHA } = require("react-google-recaptcha");
+const { default: ReCAPTCHA } = require('react-google-recaptcha');
 
 const ReCaptcha = (props) => {
   const { handleCapVal } = props;
@@ -7,7 +7,7 @@ const ReCaptcha = (props) => {
     <ReCAPTCHA
       sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY}
       onChange={(val) => handleCapVal(val)}
-      onExpired={() => handleCapVal("expired")}
+      onExpired={() => handleCapVal('expired')}
     />
   );
 };

@@ -1,8 +1,8 @@
-import { Box, Grid, Typography } from "@mui/material";
-import GradientOutlinedButton from "../GradientOutlinedButton";
-import GoogleLogo from "@/assets/svg/GoogleLogo";
-import { useTheme } from "@emotion/react";
-import styles from "./styles";
+import { Box, Grid, Typography } from '@mui/material';
+import GradientOutlinedButton from '../GradientOutlinedButton';
+import GoogleLogo from '@/assets/svg/GoogleLogo';
+import { useTheme } from '@emotion/react';
+import styles from './styles';
 
 const SubmitButtonsGoogleOrEmail = (props) => {
   const { submitText, googleSubmitText, handleGoogleSubmit, signInLoading } =
@@ -15,7 +15,7 @@ const SubmitButtonsGoogleOrEmail = (props) => {
         <GradientOutlinedButton
           bgcolor={theme.palette.Dark_Colors.Dark[1]}
           text={submitText}
-          textColor={theme.palette.Common.White["100p"]}
+          textColor={theme.palette.Common.White['100p']}
           loading={signInLoading}
           {...styles.submitButtonProps}
         />
@@ -33,7 +33,7 @@ const SubmitButtonsGoogleOrEmail = (props) => {
           iconPlacement="left"
           bgcolor={theme.palette.Dark_Colors.Dark[1]}
           text={`${googleSubmitText} Via Google`}
-          textColor={theme.palette.Common.White["100p"]}
+          textColor={theme.palette.Common.White['100p']}
           loading={signInLoading}
           clickHandler={handleGoogleSubmit}
           id="google-sign-in-selector"

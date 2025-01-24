@@ -1,38 +1,38 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from 'react';
 
-import { Grid } from "@mui/material";
-import { FormContainer } from "react-hook-form-mui";
+import { Grid } from '@mui/material';
+import { FormContainer } from 'react-hook-form-mui';
 
-import AuthTextField from "@/components/AuthTextField";
+import AuthTextField from '@/components/AuthTextField';
 
-import sharedStyles from "@/styles/shared/sharedStyles";
+import sharedStyles from '@/styles/shared/sharedStyles';
 
 import {
   AUTH_ERROR_MESSAGES,
   AUTH_STEPS,
   VALIDATION_STATES,
-} from "@/libs/constants/auth";
-import ALERT_COLORS from "@/libs/constants/notification";
-import useWatchFields from "@/libs/hooks/useWatchFields";
-import { AuthContext } from "@/libs/providers/GlobalProvider";
-import AUTH_REGEX from "@/libs/regex/auth";
-import { signUp, signUpGoogle } from "@/libs/services/user/signUp";
-import { validatePassword } from "@/libs/utils/AuthUtils";
-import SubmitButtonsGoogleOrEmail from "@/components/SubmitButtonsGoogleOrEmail/SubmitButtonsGoogleOrEmail";
-import { signOut } from "firebase/auth";
-import { auth, firestore } from "@/libs/firebase/firebaseSetup";
-import { useDispatch } from "react-redux";
-import fetchUserData from "@/libs/redux/thunks/user";
-import { useRouter } from "next/router";
-import ROUTES from "@/libs/constants/routes";
-import ReCaptcha from "@/components/ReCaptcha/ReCaptcha";
-import { CAPTCHA_ERR } from "@/libs/constants/captcha";
+} from '@/libs/constants/auth';
+import ALERT_COLORS from '@/libs/constants/notification';
+import useWatchFields from '@/libs/hooks/useWatchFields';
+import { AuthContext } from '@/libs/providers/GlobalProvider';
+import AUTH_REGEX from '@/libs/regex/auth';
+import { signUp, signUpGoogle } from '@/libs/services/user/signUp';
+import { validatePassword } from '@/libs/utils/AuthUtils';
+import SubmitButtonsGoogleOrEmail from '@/components/SubmitButtonsGoogleOrEmail/SubmitButtonsGoogleOrEmail';
+import { signOut } from 'firebase/auth';
+import { auth, firestore } from '@/libs/firebase/firebaseSetup';
+import { useDispatch } from 'react-redux';
+import fetchUserData from '@/libs/redux/thunks/user';
+import { useRouter } from 'next/router';
+import ROUTES from '@/libs/constants/routes';
+import ReCaptcha from '@/components/ReCaptcha/ReCaptcha';
+import { CAPTCHA_ERR } from '@/libs/constants/captcha';
 
 const DEFAULT_FORM_VALUES = {
-  email: "",
-  fullName: "",
-  password: "",
-  reEnterPassword: "",
+  email: '',
+  fullName: '',
+  password: '',
+  reEnterPassword: '',
 };
 
 const DEFAULT_ERR_STATE = {
@@ -44,19 +44,19 @@ const DEFAULT_ERR_STATE = {
 
 const WATCH_FIELDS = [
   {
-    fieldName: "password",
+    fieldName: 'password',
     regexPattern: AUTH_REGEX.password.regex,
   },
   {
-    fieldName: "reEnterPassword",
+    fieldName: 'reEnterPassword',
     regexPattern: AUTH_REGEX.password.regex,
   },
   {
-    fieldName: "email",
+    fieldName: 'email',
     regexPattern: AUTH_REGEX.email.regex,
   },
   {
-    fieldName: "fullName",
+    fieldName: 'fullName',
     regexPattern: AUTH_REGEX.fullName.regex,
   },
 ];
@@ -77,7 +77,7 @@ const SignUpForm = (props) => {
 
   const [error, setError] = useState(DEFAULT_ERR_STATE);
   const [loading, setLoading] = useState(false);
-  const [capVal, setCapVal] = useState("");
+  const [capVal, setCapVal] = useState('');
 
   const { handleOpenSnackBar } = useContext(AuthContext);
 
@@ -91,20 +91,20 @@ const SignUpForm = (props) => {
       return VALIDATION_STATES.SUCCESS;
     }
 
-    if (password.value === "") return VALIDATION_STATES.DEFAULT;
+    if (password.value === '') return VALIDATION_STATES.DEFAULT;
 
     return VALIDATION_STATES.ERROR;
   };
 
   const submitButtonText = () => {
     if (step === AUTH_STEPS.EMAIL) {
-      return "Continue";
+      return 'Continue';
     }
-    return "Sign Up";
+    return 'Sign Up';
   };
 
-  const capValEmpty = capVal === "";
-  const capValExpired = capVal === "expired";
+  const capValEmpty = capVal === '';
+  const capValExpired = capVal === 'expired';
   const handleCapVal = (val) => {
     setCapVal(val);
   };
@@ -132,8 +132,8 @@ const SignUpForm = (props) => {
       if (!fullName.valid && !email.valid) {
         setError({
           ...error,
-          fullName: { message: "Full name is required" },
-          email: { message: "Email address is required" },
+          fullName: { message: 'Full name is required' },
+          email: { message: 'Email address is required' },
         });
         return;
       }
@@ -141,7 +141,7 @@ const SignUpForm = (props) => {
       if (!fullName.valid) {
         setError({
           ...error,
-          fullName: { message: "Full name is required" },
+          fullName: { message: 'Full name is required' },
         });
         return;
       }
@@ -149,7 +149,7 @@ const SignUpForm = (props) => {
       if (!email.valid) {
         setError({
           ...error,
-          email: { message: "Email address is required" },
+          email: { message: 'Email address is required' },
         });
         return;
       }
@@ -167,7 +167,7 @@ const SignUpForm = (props) => {
         await signUp(email.value, password.value, fullName.value);
         handleOpenSnackBar(
           ALERT_COLORS.SUCCESS,
-          "Account created successfully"
+          'Account created successfully'
         );
 
         setEmail(email.value);
@@ -195,7 +195,7 @@ const SignUpForm = (props) => {
       console.log(data);
 
       if (data) {
-        handleOpenSnackBar(ALERT_COLORS.SUCCESS, "Sign up successful");
+        handleOpenSnackBar(ALERT_COLORS.SUCCESS, 'Sign up successful');
       }
 
       const userData = await dispatch(
@@ -223,7 +223,7 @@ const SignUpForm = (props) => {
       router.replace(ROUTES.SIGNUP);
       handleOpenSnackBar(
         ALERT_COLORS.ERROR,
-        "There was an error signing you up. Please try again later."
+        'There was an error signing you up. Please try again later.'
       );
     }
   };
@@ -308,7 +308,7 @@ const SignUpForm = (props) => {
           error={!!error.reEnterPassword}
           helperText={
             !passwordMatch && !!password.value
-              ? "Password does not match"
+              ? 'Password does not match'
               : error.reEnterPassword?.message
           }
           state={setReEnterPasswordStatus()}
